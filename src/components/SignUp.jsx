@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 import Input from "./Input";
 import { Link } from "react-router-dom";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
+
 
 function SignUp() {
   const [formData, setFormData] = useState({
@@ -12,6 +15,7 @@ function SignUp() {
   });
 
   const [errors, setErrors] = useState({});
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,6 +31,7 @@ function SignUp() {
       ...prevData,
       [name]: value,
     }));
+    
   };
 
   const validateForm = () => {
@@ -56,7 +61,7 @@ function SignUp() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!validateForm()) {
+    if(!validateForm()){
       return;
     }
     const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
@@ -74,11 +79,14 @@ function SignUp() {
     navigate("/signin");
   };
 
+  const togglePasswordVisible = () => {
+    setPasswordVisible(!passwordVisible);
+  }
   return (
     <div className="bg-slate-950 h-screen flex items-center justify-center">
       <form
         onSubmit={handleSubmit}
-        className="bg-slate-800 p-6 rounded-xl w-96"
+        className="bg-slate-600 p-6 rounded-xl w-96"
       >
         <Input
           label="Name"
@@ -88,7 +96,7 @@ function SignUp() {
           className="mb-4"
         />
         {errors.username && (
-          <p className="text-red-500 mb-2">{errors.username}</p>
+          <p className='text-red-500 mb-2'>{errors.username}</p>
         )}
         <Input
           label="Email"
@@ -98,24 +106,27 @@ function SignUp() {
           onChange={handleChange}
           className="mb-4"
         />
-        {errors.email && <p className="text-red-500 mb-4">{errors.email}</p>}
+        {errors.email && (
+          <p className="text-red-500 mb-4">{errors.email}</p>
+        )}
+        <div className="relative">
         <Input
           label="Password"
           name="password"
-          type="password"
+          type={passwordVisible ? "text" : "password"}
           value={formData.password}
           onChange={handleChange}
           className="mb-4"
         />
+        <button onClick={togglePasswordVisible} type="button" className="absolute right-2 top-2">{passwordVisible ? <FaEye /> : <FaEyeSlash />}</button>
+        </div>
         {errors.password && (
           <p className="text-red-500 mb-4">{errors.password}</p>
         )}
         <Button type="submit" text="Sign Up" className="w-full mb-4">
           Sign Up
         </Button>
-        <p className="text-white text-center ">
-          Already have an account? <Link to="/signin">Sign in</Link>
-        </p>
+        <p className="text-white text-center ">Already have an account? <Link to="/signin">Sign in</Link></p>
       </form>
     </div>
   );

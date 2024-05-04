@@ -12,14 +12,15 @@ function Dashboard() {
   };
   return (
     <>
-    <div className="flex h-screen">
+    <div className="grid grid-cols-3 h-screen">
+    <div className=" flex h-screen">
       <div
-        className={`bg-gray-500 text-white w-64 p-4 left-0 absolute h-screen ${
+        className={`bg-slate-600 text-white w-64 p-4 left-0 absolute h-screen ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         } transition-transform`}
       >
         <button
-          className="mb-4 text-white p-2 bg-red-500"
+          className="mb-4 text-white p-2 bg-red-500 rounded-md"
           onClick={closeSidebar}
         >
           <svg
@@ -39,12 +40,12 @@ function Dashboard() {
         </button>
         <ul>
           <li>
-            <Link to="/" className="block py-2 px-4 hover:bg-gray-700">
+            <Link to="/" className="block py-2 px-4 hover:bg-gray-700 rounded-md">
               Student Attendence
             </Link>
           </li>
           <li>
-            <Link to="/" className="block py-2 px-4 hover:bg-gray-700">
+            <Link to="/" className="block py-2 px-4 hover:bg-gray-700 rounded-md">
               Teacher Attendence
             </Link>
           </li>
@@ -73,6 +74,13 @@ function Dashboard() {
         </button>
       </div>
     </div>
+    <div className="col-span-2 flex items-center justify-center ">
+
+hbvc
+    
+    </div>
+    </div>
+
     </>
   );
 }
