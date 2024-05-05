@@ -86,7 +86,7 @@ function SignUp() {
     <div className="bg-slate-950 h-screen flex items-center justify-center">
       <form
         onSubmit={handleSubmit}
-        className="bg-slate-600 p-6 rounded-xl w-96"
+        className="bg-slate-600 md:p-6 p-4 rounded-xl md:w-96"
       >
         <Input
           label="Name"
